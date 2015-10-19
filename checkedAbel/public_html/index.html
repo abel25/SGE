@@ -11,18 +11,69 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="js/libs/jquery/jquery.js" type="text/javascript"></script>
         <script>
-            var valCheck1 = 4;
-            var valCheck2 = 2;
-            var valCheck3 = 1;
-            //document.getElementsById()
+            var lectura = 4;
+            var escritura = 2;
+            var ejecucion = 1;
+            var resultado = 0 * 1;
+            $("#text1").html("");
+            var check1 = false;
+            var check2 = false;
+            var check3 = false;
+
+            function operacionLectura() {
+                if (!check1) {
+                    //$("#check1").checked = true;
+                    resultado = resultado + lectura;
+                    $("#text1").val(resultado);
+                    check1 = true;
+                } else {
+                    //$("#check1").checked = false;
+                    resultado = resultado - lectura;
+                    $("#text1").val(resultado);
+                    check1 = false;
+                }
+            }
+
+            function operacionEscritura() {
+                if (!check2) {
+                    resultado = resultado + escritura;
+                    $("#text1").val(resultado);
+                    check2 = true;
+                } else {
+                    resultado = resultado - escritura;
+                    $("#text1").val(resultado);
+                    check2 = false;
+                }
+            }
+            
+            function operacionEjecucion() {
+                if (!check3) {
+                    resultado = resultado + ejecucion;
+                    $("#text1").val(resultado);
+                    check3 = true;
+                } else {
+                    resultado = resultado - ejecucion;
+                    $("#text1").val(resultado);
+                    check3 = false;
+                }
+            }
         </script>
     </head>
     <body>
         <div>
-            Lectura: <input type="checkbox" id="check1"><br>
-            Escritura: <input type="checkbox" id="check2"><br>
-            Ejecucion: <input type="checkbox" id="check3"><br>
-            Resultado: <input type="text" id="text1">
+            <table border="1">
+                <tr>
+                    <td>Lectura:4 (r)</td><td>Escritura:2 (w)</td><td>Ejecucion:1 (x)</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" id="check1" onclick="operacionLectura()"></td>
+                    <td><input type="checkbox" id="check2" onclick="operacionEscritura()"></td>
+                    <td><input type="checkbox" id="check3" onclick="operacionEjecucion()"></td>
+                </tr>
+                <tr>
+                    <td colspan="3" align="center"><input type="text" id="text1"></td>
+                </tr>
+            </table>
         </div>
     </body>
 </html>
