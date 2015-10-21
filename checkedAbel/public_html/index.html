@@ -21,7 +21,7 @@ and open the template in the editor.
             var check3 = false;
 
             function operacionLectura() {
-                if (!check1) {
+                if ($("#check1").prop("checked")) {
                     //$("#check1").checked = true;
                     resultado = resultado + lectura;
                     $("#text1").val(resultado);
