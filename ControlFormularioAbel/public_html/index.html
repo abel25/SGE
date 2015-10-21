@@ -11,14 +11,74 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="js/libs/jquery/jquery.js" type="text/javascript"></script>
         <script>
+            //var expreg = new RegExp("^[A-Z]{1,2}\\s\\d{4}\\s([B-D]|[F-H]|[J-N]|[P-T]|[V-Z]){3}$");  
+            function requisitoId() {
+                var regId = new RegExp("^[A-Za-z]{4}\\d{3}$");
+                var usuario = $("#usuario").val();
+
+                if (usuario === "") {
+                    alert("No has introducido nada");
+                    $("#usuario").focus();
+                }
+                else if (usuario.length != 7) {
+                    alert("Introduce un patron correcto de Id usuario. 4 letras y 3 digitos");
+                    $("#usuario").focus();
+                } else if (!regId.test(usuario)) {
+                    alert("No has introducido un Id usuario valido");
+                    $("#usuario").focus();
+                }
+            }
+
+            function requisitoPW() {
+                var contra = $("#contrasena").val();
+                var regContra = new RegExp("[A-Z]");
+                if (contra === "") {
+                    alert("No has introducido contraseña");
+                    $("#contrasena").focus();
+                } else {
+                    if (contra.length > 5 && contra.length < 16) {
+                        if (!regContra.test(contra)) {
+                            alert("La contraseña debe tener almenos una Mayuscula");
+                            $("#contrasena").focus();
+                        } else {
+                            regContra = new RegExp("[a-z]");
+                            if (!regContra.test(contra)) {
+                                alert("La contraseña debe tener almenos una minuscula");
+                                $("#contrasena").focus();
+                            } else {
+                                regContra = new RegExp("[0-9]");// = new RegExp ("\\d");
+                                if (!regContra.test(contra)) {
+                                    alert("La contraseña debe tener almenos un digito");
+                                    $("#contrasena").focus();
+                                }
+                            }
+                        }
+                    } else {
+                        alert("Contraseña entre 6 y 15 valores");
+                        $("#contrasena").focus();
+                    }
+                }
+            }
+            
+            function comprobar(){
+                return confirm("¿Seguro que quieres enviar tus informacio nde usuario?");
+            }
+            
         </script>
     </head>
     <body>
         <div>
-            Nombre: <input type="text" id="nombre"> 
-            Apellidos: <input type="text" id="apellidos">
-            Fecha de Nacimiento: <input type="text" id="anno">
-            Sexo: <input type="radio" id="varon" value="varon" name="radio" checked> <input type="radio" id="mujer" value="mujer"> 
+            Id Usuario: <input type="text" id="usuario" onblur="requisitoId()"><br>
+            Contraseña: <input type="password" id="contrasena" onblur="requisitoPW()"><br><br><br>
+            <form id="formulario" method="GET" onsubmit="comprobar()">
+                Nombre: <input type="text" name="nombre" id="nombre" pattern="[A-Za-z]{1,}" required><br> 
+                Apellidos: <input type="text" name="apellidos" id="apellidos" pattern="[A-Za-z]{1,}" required><br>
+                Año de Nacimiento: <input type="text" name="ano" id="anno" pattern="[0-9]{4}" required><br>
+                Sexo: <input type="radio" name="sexo" id="varon" value="varon" name="radio" checked>
+                <input type="radio" id="mujer" value="mujer" name="radio"> <br>
+                Email: <input type="email" name="email" id="email" required><br>
+                Aceptar: <input type="submit" id="enviar">
+            </form>
         </div>
     </body>
 </html>
